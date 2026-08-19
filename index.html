@@ -9,11 +9,11 @@
 
     <title>For You ♡ Nazmaa Arindya Putriii</title>
 
-
     <style>
+
         /* =====================================================
-   RESET
-===================================================== */
+           RESET
+        ===================================================== */
 
         * {
             margin: 0;
@@ -21,25 +21,22 @@
             box-sizing: border-box;
         }
 
-
         html,
         body {
-
             width: 100%;
             height: 100%;
-
         }
 
-
         body {
-
             overflow: hidden;
 
             background:
-                radial-gradient(circle at center,
+                radial-gradient(
+                    circle at center,
                     #5a4148 0%,
                     #24171d 55%,
-                    #0e090c 100%);
+                    #0e090c 100%
+                );
 
             color: #fff;
 
@@ -51,130 +48,100 @@
 
 
         /* =====================================================
-   BACKGROUND HEARTS
-===================================================== */
+           BACKGROUND HEARTS
+        ===================================================== */
 
         .hearts {
-
             position: fixed;
-
             inset: 0;
-
             pointer-events: none;
-
             overflow: hidden;
-
         }
 
-
         .heart {
-
             position: absolute;
-
             bottom: -30px;
-
             opacity: 0;
 
             animation:
                 floatHeart linear infinite;
-
         }
-
 
         @keyframes floatHeart {
 
             0% {
-
                 transform:
-                    translateY(0) rotate(0deg) scale(0.8);
+                    translateY(0)
+                    rotate(0deg)
+                    scale(0.8);
 
                 opacity: 0;
-
             }
 
             15% {
-
                 opacity: 0.35;
-
             }
 
             80% {
-
                 opacity: 0.2;
-
             }
 
             100% {
-
                 transform:
-                    translateY(-110vh) rotate(25deg) scale(1.2);
+                    translateY(-110vh)
+                    rotate(25deg)
+                    scale(1.2);
 
                 opacity: 0;
-
             }
-
         }
 
 
         /* =====================================================
-   MAIN
-===================================================== */
+           MAIN
+        ===================================================== */
 
         .voice-lock {
-
             position: relative;
-
             z-index: 2;
 
             width: 100%;
-
             height: 100%;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             text-align: center;
 
             padding: 25px;
-
         }
 
-
         .voice-content {
-
             width: min(90vw, 500px);
-
         }
 
 
         /* =====================================================
-   SMALL TEXT
-===================================================== */
+           SMALL TEXT
+        ===================================================== */
 
         .intro {
-
             font-size: 13px;
-
             letter-spacing: 4px;
-
             text-transform: uppercase;
 
             opacity: 0.55;
 
             margin-bottom: 28px;
-
         }
 
 
         /* =====================================================
-   TITLE
-===================================================== */
+           TITLE
+        ===================================================== */
 
         h1 {
-
             font-size:
                 clamp(30px, 8vw, 52px);
 
@@ -183,63 +150,50 @@
             line-height: 1.2;
 
             margin-bottom: 22px;
-
         }
 
-
         .question {
-
             font-size:
                 clamp(17px, 4vw, 21px);
 
             line-height: 1.8;
 
             opacity: 0.8;
-
         }
 
 
         /* =====================================================
-   DATE HIGHLIGHT
-===================================================== */
+           DATE HIGHLIGHT
+        ===================================================== */
 
         .date-question {
-
             margin-top: 8px;
 
             font-size:
                 clamp(20px, 5vw, 26px);
 
             font-style: italic;
-
         }
 
 
         /* =====================================================
-   MIC
-===================================================== */
+           MIC
+        ===================================================== */
 
         .mic-wrapper {
-
             margin-top: 45px;
 
             display: flex;
-
             justify-content: center;
-
         }
 
-
         .mic-button {
-
             position: relative;
 
             width: 82px;
-
             height: 82px;
 
             border: none;
-
             border-radius: 50%;
 
             background:
@@ -252,76 +206,66 @@
             cursor: pointer;
 
             backdrop-filter: blur(10px);
-
             -webkit-backdrop-filter: blur(10px);
 
             box-shadow:
                 0 0 0 1px rgba(255, 255, 255, 0.15),
-
                 0 10px 35px rgba(0, 0, 0, 0.3);
 
             transition:
                 transform 0.3s ease,
                 background 0.3s ease;
-
         }
 
-
         .mic-button:hover {
-
-            transform:
-                scale(1.08);
+            transform: scale(1.08);
 
             background:
                 rgba(255, 255, 255, 0.18);
+        }
 
+        .mic-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
 
         /* =====================================================
-   LISTENING
-===================================================== */
+           LISTENING
+        ===================================================== */
 
         .mic-button.listening {
-
             animation:
                 microphonePulse 1.3s infinite;
-
         }
-
 
         @keyframes microphonePulse {
 
             0% {
-
                 box-shadow:
-                    0 0 0 0 rgba(255, 150, 190, 0.5);
-
+                    0 0 0 0
+                    rgba(255, 150, 190, 0.5);
             }
 
             70% {
-
                 box-shadow:
-                    0 0 0 25px rgba(255, 150, 190, 0);
-
+                    0 0 0 25px
+                    rgba(255, 150, 190, 0);
             }
 
             100% {
-
                 box-shadow:
-                    0 0 0 0 rgba(255, 150, 190, 0);
-
+                    0 0 0 0
+                    rgba(255, 150, 190, 0);
             }
-
         }
 
 
         /* =====================================================
-   STATUS
-===================================================== */
+           STATUS
+        ===================================================== */
 
         .status {
-
             min-height: 28px;
 
             margin-top: 28px;
@@ -332,16 +276,14 @@
 
             transition:
                 opacity 0.3s ease;
-
         }
 
 
         /* =====================================================
-   DETECTED TEXT
-===================================================== */
+           DETECTED TEXT
+        ===================================================== */
 
         .detected {
-
             min-height: 24px;
 
             margin-top: 10px;
@@ -351,18 +293,15 @@
             font-style: italic;
 
             opacity: 0.4;
-
         }
 
 
         /* =====================================================
-   SUCCESS
-===================================================== */
+           SUCCESS
+        ===================================================== */
 
         .success-screen {
-
             position: fixed;
-
             inset: 0;
 
             z-index: 10;
@@ -370,18 +309,18 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             text-align: center;
 
             background:
-                radial-gradient(circle at center,
+                radial-gradient(
+                    circle at center,
                     #6d4c56,
-                    #1b1116);
+                    #1b1116
+                );
 
             opacity: 0;
-
             visibility: hidden;
 
             pointer-events: none;
@@ -389,115 +328,84 @@
             transition:
                 opacity 1s ease,
                 visibility 1s ease;
-
         }
-
 
         .success-screen.show {
-
             opacity: 1;
-
             visibility: visible;
-
         }
 
-
         .success-content {
-
             transform:
-                translateY(20px) scale(0.95);
+                translateY(20px)
+                scale(0.95);
 
             transition:
                 transform 1s ease;
-
         }
-
 
         .success-screen.show .success-content {
-
             transform:
-                translateY(0) scale(1);
-
+                translateY(0)
+                scale(1);
         }
 
-
         .success-heart {
-
             font-size: 60px;
 
             margin-bottom: 25px;
 
             animation:
                 heartBeat 1.2s infinite;
-
         }
-
 
         @keyframes heartBeat {
 
             0%,
             100% {
-
-                transform:
-                    scale(1);
-
+                transform: scale(1);
             }
 
             50% {
-
-                transform:
-                    scale(1.15);
-
+                transform: scale(1.15);
             }
-
         }
 
-
         .success-content h2 {
-
             font-size:
                 clamp(28px, 7vw, 45px);
 
             font-weight: normal;
 
             margin-bottom: 15px;
-
         }
 
-
         .success-content p {
-
             font-size: 16px;
 
             opacity: 0.65;
-
         }
 
 
         /* =====================================================
-   FADE OUT
-===================================================== */
+           FADE OUT
+        ===================================================== */
 
         .voice-lock.unlocking {
-
             animation:
                 unlockFade 1.2s forwards;
-
         }
-
 
         @keyframes unlockFade {
 
             to {
-
                 opacity: 0;
 
                 transform:
                     scale(1.03);
-
             }
-
         }
+
     </style>
 
 </head>
@@ -507,83 +415,77 @@
 
 
     <!-- =====================================================
-     FLOATING HEARTS
-===================================================== -->
+         FLOATING HEARTS
+    ===================================================== -->
 
     <div class="hearts">
 
-        <span class="heart" style="left:10%; animation-duration:12s; font-size:18px;">
+        <span class="heart"
+              style="left:10%; animation-duration:12s; font-size:18px;">
             ♡
         </span>
 
-        <span class="heart" style="left:25%; animation-duration:16s; font-size:14px;">
+        <span class="heart"
+              style="left:25%; animation-duration:16s; font-size:14px;">
             ♡
         </span>
 
-        <span class="heart" style="left:42%; animation-duration:13s; font-size:20px;">
+        <span class="heart"
+              style="left:42%; animation-duration:13s; font-size:20px;">
             ♡
         </span>
 
-        <span class="heart" style="left:60%; animation-duration:18s; font-size:15px;">
+        <span class="heart"
+              style="left:60%; animation-duration:18s; font-size:15px;">
             ♡
         </span>
 
-        <span class="heart" style="left:78%; animation-duration:14s; font-size:19px;">
+        <span class="heart"
+              style="left:78%; animation-duration:14s; font-size:19px;">
             ♡
         </span>
 
-        <span class="heart" style="left:90%; animation-duration:17s; font-size:13px;">
+        <span class="heart"
+              style="left:90%; animation-duration:17s; font-size:13px;">
             ♡
         </span>
 
     </div>
 
 
-
     <!-- =====================================================
-     VOICE LOCK
-===================================================== -->
+         VOICE LOCK
+    ===================================================== -->
 
     <main class="voice-lock" id="voiceLock">
 
-
         <div class="voice-content">
 
-
             <div class="intro">
-
                 A little question
-
             </div>
 
-
             <h1>
-
                 Sebelum kamu masuk...
-
             </h1>
 
-
             <p class="question">
-
                 Aku mau tahu satu hal kecil.
-
             </p>
-
 
             <p class="date-question">
-
                 Tanggal berapa semuanya dimulai?
-
             </p>
-
 
 
             <!-- MICROPHONE -->
 
             <div class="mic-wrapper">
 
-                <button class="mic-button" id="micButton" aria-label="Mulai berbicara">
+                <button
+                    class="mic-button"
+                    id="micButton"
+                    aria-label="Mulai berbicara">
 
                     🎙️
 
@@ -593,47 +495,34 @@
 
 
             <p class="status" id="status">
-
                 Tekan mic dan ucapkan tanggalnya...
-
             </p>
 
-
             <p class="detected" id="detected"></p>
-
 
         </div>
 
     </main>
 
 
-
     <!-- =====================================================
-     SUCCESS
-===================================================== -->
+         SUCCESS
+    ===================================================== -->
 
     <div class="success-screen" id="successScreen">
 
         <div class="success-content">
 
             <div class="success-heart">
-
                 ❤️
-
             </div>
 
-
             <h2>
-
                 Kamu masih ingat...
-
             </h2>
 
-
             <p>
-
                 2 Oktober 2024.
-
             </p>
 
         </div>
@@ -641,8 +530,6 @@
     </div>
 
 
-
-    ```html
     <script>
 
         /* =====================================================
@@ -665,7 +552,6 @@
             document.getElementById("successScreen");
 
 
-
         /* =====================================================
            SPEECH RECOGNITION
         ===================================================== */
@@ -675,10 +561,14 @@
             window.webkitSpeechRecognition;
 
 
+        /*
+           Browser tidak mendukung microphone
+        */
+
         if (!SpeechRecognition) {
 
             status.innerText =
-                "Browser kamu belum mendukung voice recognition 😭";
+                "Browser ini belum mendukung voice recognition 😭";
 
             micButton.disabled = true;
 
@@ -688,54 +578,190 @@
                 new SpeechRecognition();
 
 
-            /* Bahasa Indonesia */
+            /*
+               Bahasa Indonesia
+            */
 
             recognition.lang = "id-ID";
 
 
             /*
-               Terus mendengarkan sampai
-               kata terdeteksi.
+               PENTING:
+               Jangan continuous.
+
+               Kita hanya ingin menangkap
+               satu jawaban.
             */
 
-            recognition.continuous = true;
+            recognition.continuous = false;
 
 
             /*
                Tampilkan hasil sementara
-               sambil user bicara.
             */
 
             recognition.interimResults = true;
 
 
             /*
-               Ambil beberapa kemungkinan
-               hasil pengenalan suara.
+               Ambil beberapa alternatif
             */
 
             recognition.maxAlternatives = 5;
 
 
             let isListening = false;
-            let listenTimeout;
-
+            let hasUnlocked = false;
+            let listenTimeout = null;
 
 
             /* =================================================
-               MIC CLICK
+               NORMALISASI TEXT
+            ================================================= */
+
+            function normalizeText(text) {
+
+                return text
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .replace(/[.,!?]/g, " ")
+                    .replace(/\s+/g, " ")
+                    .trim();
+
+            }
+
+
+            /* =================================================
+               CEK TANGGAL
+            ================================================= */
+
+            function checkDate(text) {
+
+                const normalized =
+                    normalizeText(text);
+
+
+                console.log(
+                    "Hasil voice:",
+                    normalized
+                );
+
+
+                /*
+                   Bentuk angka:
+
+                   2 oktober 2024
+                   02 oktober 2024
+                */
+
+                const numericDate =
+                    /(?:^|\s)0?2(?:\s+|[-/])(?:oktober|october)(?:\s+|[-/])2024(?:\s|$)/i;
+
+
+                if (numericDate.test(normalized)) {
+                    return true;
+                }
+
+
+                /*
+                   Bentuk:
+
+                   dua oktober 2024
+                */
+
+                if (
+                    normalized.includes("dua") &&
+                    (
+                        normalized.includes("oktober") ||
+                        normalized.includes("october")
+                    ) &&
+                    normalized.includes("2024")
+                ) {
+
+                    return true;
+
+                }
+
+
+                /*
+                   Bentuk:
+
+                   dua oktober
+                   dua ribu dua puluh empat
+                */
+
+                const hasDay =
+                    normalized.includes("dua");
+
+
+                const hasMonth =
+                    normalized.includes("oktober") ||
+                    normalized.includes("october");
+
+
+                const hasYearWords =
+                    normalized.includes("dua ribu dua puluh empat") ||
+                    normalized.includes("dua ribu duapuluh empat") ||
+                    normalized.includes("dua ribu dua puluh empat");
+
+
+                if (
+                    hasDay &&
+                    hasMonth &&
+                    hasYearWords
+                ) {
+
+                    return true;
+
+                }
+
+
+                /*
+                   Beberapa hasil speech recognition
+                   kadang menjadi:
+
+                   2 oktober 24
+
+                   atau
+
+                   dua oktober dua ribu 24
+                */
+
+                if (
+                    hasDay &&
+                    hasMonth &&
+                    (
+                        normalized.includes("24") ||
+                        normalized.includes("dua ribu")
+                    )
+                ) {
+
+                    return true;
+
+                }
+
+
+                return false;
+
+            }
+
+
+            /* =================================================
+               START MICROPHONE
             ================================================= */
 
             micButton.addEventListener(
                 "click",
                 function () {
 
+
                     /*
-                       Kalau sedang mendengarkan,
-                       jangan start lagi.
+                       Kalau sedang listening,
+                       jangan jalankan lagi.
                     */
 
-                    if (isListening) {
+                    if (isListening || hasUnlocked) {
                         return;
                     }
 
@@ -744,7 +770,7 @@
 
 
                     status.innerText =
-                        "Aku mendengarkan... 🎙️";
+                        "Menyalakan microphone... 🎙️";
 
 
                     micButton.classList.add(
@@ -755,22 +781,41 @@
                     isListening = true;
 
 
+                    /*
+                       Timeout 10 detik.
+                       Kalau tidak bicara,
+                       otomatis berhenti.
+                    */
+
+                    clearTimeout(listenTimeout);
+
+
+                    listenTimeout =
+                        setTimeout(
+                            function () {
+
+                                if (isListening) {
+
+                                    recognition.stop();
+
+                                    status.innerText =
+                                        "Belum terdengar apa-apa. Coba lagi ❤️";
+
+                                }
+
+                            },
+                            10000
+                        );
+
+
                     try {
 
                         recognition.start();
 
-                        /* Auto-stop setelah 15 detik */
-                        listenTimeout = setTimeout(
-                            function () {
-                                recognition.stop();
-                            },
-                            15000
-                        );
-
                     } catch (error) {
 
                         console.log(
-                            "Recognition error:",
+                            "Recognition start error:",
                             error
                         );
 
@@ -780,15 +825,17 @@
                             "listening"
                         );
 
+                        status.innerText =
+                            "Coba tekan microphone lagi.";
+
                     }
 
                 }
             );
 
 
-
             /* =================================================
-               SAAT MULAI MENDENGARKAN
+               RECOGNITION START
             ================================================= */
 
             recognition.addEventListener(
@@ -796,11 +843,10 @@
                 function () {
 
                     status.innerText =
-                        "Silakan bicara... ❤️";
+                        "Silakan ucapkan tanggalnya... ❤️";
 
                 }
             );
-
 
 
             /* =================================================
@@ -812,79 +858,84 @@
                 function (event) {
 
 
-                    let transcript = "";
-                    let interimTranscript = "";
+                    let finalText = "";
+                    let interimText = "";
 
-
-                    /*
-                       Ambil hasil final dan sementara.
-                    */
 
                     for (
-                        let i = 0;
+                        let i = event.resultIndex;
                         i < event.results.length;
                         i++
                     ) {
 
-                        const transcriptSegment =
-                            event.results[i][0]
-                                .transcript;
+                        const result =
+                            event.results[i];
 
-                        if (event.results[i].isFinal) {
 
-                            transcript +=
-                                transcriptSegment;
+                        const transcript =
+                            result[0].transcript;
+
+
+                        if (result.isFinal) {
+
+                            finalText += transcript;
 
                         } else {
 
-                            interimTranscript +=
-                                transcriptSegment;
+                            interimText += transcript;
 
                         }
 
                     }
 
 
-                    const finalTranscript =
-                        transcript
-                            .toLowerCase()
-                            .trim();
-
-                    const displayText = finalTranscript ||
-                        interimTranscript.toLowerCase().trim();
+                    const finalNormalized =
+                        normalizeText(finalText);
 
 
-                    console.log(
-                        "Yang terdengar:",
-                        finalTranscript
-                    );
+                    const interimNormalized =
+                        normalizeText(interimText);
 
 
-                    detected.innerText =
-                        `"${displayText}"`;
+                    const displayText =
+                        finalNormalized ||
+                        interimNormalized;
+
+
+                    if (displayText) {
+
+                        detected.innerText =
+                            `"${displayText}"`;
+
+                        status.innerText =
+                            "Aku dengar: " +
+                            displayText;
+
+                    }
 
 
                     /*
-                       Beri feedback bahwa
-                       suara sudah tertangkap.
+                       Hanya cek hasil FINAL
                     */
 
-                    status.innerText =
-                        "Aku dengar: " +
-                        displayText;
-
-
-
-                    /* =========================================
-                       CEK TANGGAL
-                    ========================================= */
-
                     if (
-                        checkDate(finalTranscript)
+                        finalNormalized &&
+                        checkDate(finalNormalized)
                     ) {
 
-                        /* Kata terdeteksi → matikan mic */
+                        hasUnlocked = true;
+
+                        clearTimeout(
+                            listenTimeout
+                        );
+
+
+                        status.innerText =
+                            "Kamu masih ingat... ❤️";
+
+
                         recognition.stop();
+
 
                         unlockWebsite();
 
@@ -894,26 +945,52 @@
             );
 
 
-
             /* =================================================
-               SELESAI MENDENGARKAN
+               RECOGNITION END
             ================================================= */
 
             recognition.addEventListener(
                 "end",
                 function () {
 
-                    clearTimeout(listenTimeout);
+                    clearTimeout(
+                        listenTimeout
+                    );
+
 
                     isListening = false;
+
 
                     micButton.classList.remove(
                         "listening"
                     );
 
+
+                    /*
+                       Kalau belum berhasil,
+                       user bisa klik lagi.
+                    */
+
+                    if (!hasUnlocked) {
+
+                        /*
+                           Jangan langsung ubah pesan
+                           kalau sudah ada hasil suara.
+                        */
+
+                        if (
+                            !detected.innerText
+                        ) {
+
+                            status.innerText =
+                                "Tekan mic dan coba lagi... ❤️";
+
+                        }
+
+                    }
+
                 }
             );
-
 
 
             /* =================================================
@@ -925,11 +1002,15 @@
                 function (event) {
 
                     console.log(
-                        "Speech error:",
+                        "Speech recognition error:",
                         event.error
                     );
 
-                    clearTimeout(listenTimeout);
+
+                    clearTimeout(
+                        listenTimeout
+                    );
+
 
                     isListening = false;
 
@@ -939,40 +1020,63 @@
                     );
 
 
-                    if (
-                        event.error ===
-                        "not-allowed"
-                    ) {
+                    switch (event.error) {
 
-                        status.innerText =
-                            "Microphone belum diizinkan 😭";
 
-                    }
+                        case "not-allowed":
 
-                    else if (
-                        event.error ===
-                        "no-speech"
-                    ) {
+                            status.innerText =
+                                "Microphone belum diizinkan 😭";
 
-                        status.innerText =
-                            "Aku belum dengar suara kamu 😭 Coba ngomong lagi.";
+                            break;
 
-                    }
 
-                    else if (
-                        event.error ===
-                        "audio-capture"
-                    ) {
+                        case "permission-denied":
 
-                        status.innerText =
-                            "Microphone tidak ditemukan.";
+                            status.innerText =
+                                "Izin microphone ditolak 😭";
 
-                    }
+                            break;
 
-                    else {
 
-                        status.innerText =
-                            "Ada masalah dengan microphone. Coba lagi.";
+                        case "no-speech":
+
+                            status.innerText =
+                                "Aku belum dengar suara kamu 😭 Coba tekan mic lagi.";
+
+                            break;
+
+
+                        case "audio-capture":
+
+                            status.innerText =
+                                "Microphone tidak ditemukan 😭";
+
+                            break;
+
+
+                        case "network":
+
+                            status.innerText =
+                                "Voice recognition membutuhkan koneksi internet.";
+
+                            break;
+
+
+                        case "aborted":
+
+                            status.innerText =
+                                "Microphone berhenti. Tekan lagi untuk mencoba.";
+
+                            break;
+
+
+                        default:
+
+                            status.innerText =
+                                "Ada masalah dengan microphone. Coba lagi.";
+
+                            break;
 
                     }
 
@@ -982,61 +1086,22 @@
         }
 
 
-
-        /* =====================================================
-           CEK TANGGAL — LEBIH PEKA
-        ===================================================== */
-
-        function checkDate(text) {
-
-            text = text
-                .toLowerCase()
-                .replace(/[.,!?]/g, " ")
-                .replace(/\s+/g, " ")
-                .trim();
-
-
-            /* Normalisasi angka */
-
-            const normalized = text
-                .replace(/\b2\b/g, "dua")
-                .replace(/\b2024\b/g, "dua ribu dua puluh empat");
-
-
-            /* Hari */
-
-            const hasDay =
-                normalized.includes("dua");
-
-
-            /* Bulan */
-
-            const hasMonth =
-                normalized.includes("oktober") ||
-                normalized.includes("october");
-
-
-            /* Tahun */
-
-            const hasYear =
-                normalized.includes(
-                    "dua ribu dua puluh empat"
-                );
-
-
-            return (
-                hasDay &&
-                hasMonth &&
-                hasYear
-            );
-        }
-
-
         /* =====================================================
            UNLOCK WEBSITE
         ===================================================== */
 
         function unlockWebsite() {
+
+
+            /*
+               Cegah fungsi terpanggil dua kali
+            */
+
+            if (
+                successScreen.classList.contains("show")
+            ) {
+                return;
+            }
 
 
             status.innerText =
@@ -1048,10 +1113,18 @@
             );
 
 
+            /*
+               Fade halaman utama
+            */
+
             voiceLock.classList.add(
                 "unlocking"
             );
 
+
+            /*
+               Tampilkan success screen
+            */
 
             setTimeout(
                 function () {
@@ -1066,8 +1139,8 @@
 
 
             /*
-               Tunggu animasi selesai,
-               lalu masuk ke website.
+               Setelah 3 detik,
+               masuk home.html
             */
 
             setTimeout(
@@ -1083,7 +1156,6 @@
         }
 
     </script>
-    ```
 
 </body>
 
