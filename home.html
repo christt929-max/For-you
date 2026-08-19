@@ -2268,7 +2268,7 @@
     left: 50%;
     top: 50%;
 
-    width: min(850px, 90%);
+    width: min(900px, 100%);
 
     transform:
         translate(-50%,-50%)
@@ -2285,7 +2285,7 @@
         transform 1.5s cubic-bezier(.22,.78,.22,1);
 
     /* Chapter Three video: centered and 2px larger */
-    width: min(612px, calc(100% - 40px));
+    width: min(712px, calc(100% - 52px));
     aspect-ratio: 16 / 9;
     height: auto;
 }
@@ -2666,7 +2666,7 @@
             right: 30px;
             top: 82px;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #9b626f 0%, #704451 100%);
+            background: linear-gradient(135deg, #fab2c8  0%, #fab2c8 100%);
             color: white;
             border: none;
             border-radius: 25px;
@@ -2698,6 +2698,7 @@
             justify-content: center;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none; 
             transition: opacity .3s ease, visibility .3s ease;
             z-index: 250;
             padding: 20px;
@@ -2706,6 +2707,7 @@
         .music-modal-overlay.show {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
 
         .music-modal {
@@ -3663,7 +3665,7 @@
             right: 30px;
             top: 30px;
             padding: 12px 24px;
-            background: linear-gradient(135deg, #e659da 0%, #7c1c57 100%);
+            background: linear-gradient(135deg, #fab2c8  0%, #fab2c8  100%);
             color: white;
             border: none;
             border-radius: 25px;
@@ -4424,7 +4426,7 @@
             <button class="music-mute" id="musicMute">🔊 Mute</button>
 
             <p class="music-note">
-                Pastikan file <b><aset>sudden shower.mp3</b> dan <b><aset>risk it all.mp3</b>
+                Pastikan file <b>aset/sudden shower.mp3</b> dan <b>aset/risk it all.mp3</b>
                 berada di folder yang sama dengan HTML ini.
             </p>
 
@@ -4799,15 +4801,17 @@
 
     <div class="story-video-wrap" id="storyVideoWrap">
 
-    <iframe
+    <video
         class="story-video"
         id="storyVideo"
-        src="https://drive.google.com/file/d/1aBcRiIIjZ7w2ErOeAL3ftXKWdQBn_0Gg/preview"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
+        controls
+        playsinline
+        preload="metadata"
         style="width: 100% !important; height: 100% !important; display: block; border-radius: 8px; border: none; margin: 0 auto !important;"
-    ></iframe>
+    >
+        <source src="aset/Vid buat ayang.mp4" type="video/mp4">
+        Browser kamu tidak mendukung pemutaran video.
+    </video>
 
     <div class="video-overlay" style="pointer-events: none; display: none;"></div>
 
@@ -6923,55 +6927,138 @@ function stopLoveCamera() {
 }
 /* =====================================================
    MUSIC PLAYER
+   Isolated from the rest of the page.
 ===================================================== */
+(() => {
+    const musicButton = document.getElementById("musicButton");
+    const musicModalOverlay = document.getElementById("musicModalOverlay");
+    const musicModalClose = document.getElementById("musicModalClose");
+    const musicStatus = document.getElementById("musicStatus");
+    const musicMute = document.getElementById("musicMute");
+    const trackButtons = document.querySelectorAll(".music-track-btn");
 
-const spotifyPlay =
-    document.getElementById(
-        "spotifyPlay"
-    );
+    if (!musicButton || !musicModalOverlay) return;
 
-let musicPlaying = false;
+    let currentAudio = null;
+    let currentButton = null;
+    let muted = false;
 
-
-/*
-   Nanti kalau kamu punya file MP3,
-   kita tinggal sambungkan di sini.
-*/
-
-const music =
-    new Audio(
-        "song.mp3"
-    );
-
-
-spotifyPlay.addEventListener(
-    "click",
-    () => {
-
-        if (!musicPlaying) {
-
-            music.play();
-
-            musicPlaying = true;
-
-            spotifyPlay.textContent =
-                "Ⅱ";
-
-        }
-        else {
-
-            music.pause();
-
-            musicPlaying = false;
-
-            spotifyPlay.textContent =
-                "▶";
-
-        }
-
+    function updateButton(button, playing) {
+        if (!button) return;
+        const icon = button.querySelector(".music-track-icon");
+        if (icon) icon.textContent = playing ? "Ⅱ" : "▶";
+        button.classList.toggle("active", playing);
     }
-);
 
+    function stopCurrent(resetButton = true) {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+        if (resetButton) updateButton(currentButton, false);
+        currentAudio = null;
+        currentButton = null;
+    }
+
+    function closeMusicModal() {
+        musicModalOverlay.classList.remove("show");
+    }
+
+    musicButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        musicModalOverlay.classList.add("show");
+    });
+
+    musicModalClose?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeMusicModal();
+    });
+
+    musicModalOverlay.addEventListener("click", (event) => {
+        if (event.target === musicModalOverlay) closeMusicModal();
+    });
+
+    trackButtons.forEach(button => {
+        button.addEventListener("click", async (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const song = button.dataset.song;
+            const title = button.dataset.title || song;
+            if (!song) return;
+
+            if (currentAudio && currentButton === button) {
+                if (currentAudio.paused) {
+                    try {
+                        await currentAudio.play();
+                        updateButton(button, true);
+                        if (musicStatus) musicStatus.textContent = `♫ ${title} sedang diputar`;
+                    } catch (error) {
+                        if (musicStatus) musicStatus.textContent = `Gagal memutar ${title}`;
+                        console.error("Music playback error:", error);
+                    }
+                } else {
+                    currentAudio.pause();
+                    updateButton(button, false);
+                    if (musicStatus) musicStatus.textContent = `${title} dijeda ♡`;
+                }
+                return;
+            }
+
+          // Switching tracks always stops the previous track first.
+             stopCurrent();
+
+                const audio = new Audio(`aset/${song}`);
+                audio.preload = "auto";
+                audio.loop = false;
+                audio.muted = muted;
+                currentAudio = audio;
+                currentButton = button;
+
+            audio.addEventListener("ended", () => {
+                updateButton(button, false);
+                if (currentAudio === audio) {
+                    currentAudio = null;
+                    currentButton = null;
+                }
+                if (musicStatus) musicStatus.textContent = `${title} selesai ♡`;
+            });
+
+            audio.addEventListener("error", () => {
+                updateButton(button, false);
+                if (currentAudio === audio) {
+                    currentAudio = null;
+                    currentButton = null;
+                }
+                if (musicStatus) musicStatus.textContent = `File "${song}" tidak ditemukan atau tidak bisa diputar.`;
+            });
+
+            try {
+                await audio.play();
+                updateButton(button, true);
+                if (musicStatus) musicStatus.textContent = `♫ ${title} sedang diputar`;
+            } catch (error) {
+                updateButton(button, false);
+                if (currentAudio === audio) {
+                    currentAudio = null;
+                    currentButton = null;
+                }
+                if (musicStatus) musicStatus.textContent = `Tidak dapat memutar ${title}. Pastikan file MP3 ada di folder yang sama.`;
+                console.error("Music playback error:", error);
+            }
+        });
+    });
+
+    musicMute?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        muted = !muted;
+        if (currentAudio) currentAudio.muted = muted;
+        musicMute.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+    });
+})();
 
 </script>
 
@@ -7141,8 +7228,8 @@ spotifyPlay.addEventListener(
                     */
 
                     if (
-                        video.id ===
-                        "cameraFeed"
+                        video.id !==
+                        "storyVideo"
                     ) return;
 
 

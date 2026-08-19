@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>For You ♡ Nazmaa Arindya Putriii</title>
+    <title>For You ♡ Nazmaa Arindya Putriiii</title>
 
     <style>
 
@@ -692,18 +692,23 @@
                 */
 
                 const hasDay =
-                    normalized.includes("dua");
+                    normalized.includes("dua") ||
+                    normalized.includes("2") ||
+                    normalized.includes("02");
 
 
                 const hasMonth =
                     normalized.includes("oktober") ||
-                    normalized.includes("october");
+                    normalized.includes("october") ||
+                    normalized.includes("okt");
 
 
                 const hasYearWords =
+                    normalized.includes("2024") ||
                     normalized.includes("dua ribu dua puluh empat") ||
                     normalized.includes("dua ribu duapuluh empat") ||
-                    normalized.includes("dua ribu dua puluh empat");
+                    normalized.includes("dua puluh empat") ||
+                    normalized.includes("24");
 
 
                 if (
