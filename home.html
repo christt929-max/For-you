@@ -3486,6 +3486,53 @@
 
 
 
+        /* =====================================================
+           MANUAL TRAIN BUTTON
+        ===================================================== */
+        .train-manual-btn {
+            position: fixed;
+            left: 18px;
+            bottom: 18px;
+            z-index: 10000;
+            border: 1px solid rgba(125,85,90,.22);
+            border-radius: 999px;
+            padding: 10px 15px;
+            background: rgba(255,245,247,.88);
+            color: #70464f;
+            box-shadow: 0 8px 22px rgba(70,40,48,.16), inset 0 0 12px rgba(255,255,255,.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            font: inherit;
+            font-size: 13px;
+            letter-spacing: .5px;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease, opacity .3s ease;
+        }
+
+        .train-manual-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 11px 26px rgba(70,40,48,.2), inset 0 0 12px rgba(255,255,255,.55);
+        }
+
+        .train-manual-btn:active {
+            transform: translateY(0) scale(.97);
+        }
+
+        .train-manual-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media(max-width:700px) {
+            .train-manual-btn {
+                left: 12px;
+                bottom: 12px;
+                padding: 9px 13px;
+                font-size: 12px;
+            }
+        }
+
+
         /* Webcam POV: never display the camera image */
         .camera-feed {
             display: none !important;
@@ -4264,6 +4311,8 @@
 
 
 <body>
+
+    <button class="train-manual-btn" id="trainManualBtn" type="button" aria-label="Tampilkan kereta">🚂 Kereta</button>
 
 
     <!-- =====================================================
@@ -6166,8 +6215,9 @@ async function startGestureCamera() {
             if (!results.multiHandLandmarks ||
                 !results.multiHandLandmarks.length) {
 
+                twoFingerConfidence = 0;
                 gestureLock.textContent =
-                    "✌️  Tunjukkan 2 jari ke kamera";
+                    "✌️ Belum terdeteksi — tunjukkan 2 jari ke kamera";
 
                 return;
             }
@@ -6175,19 +6225,36 @@ async function startGestureCamera() {
             const lm =
                 results.multiHandLandmarks[0];
 
+            // Tangan terlalu jauh/kecil untuk dibaca dengan stabil.
+            const xs = lm.map(point => point.x);
+            const ys = lm.map(point => point.y);
+            const handWidth = Math.max(...xs) - Math.min(...xs);
+            const handHeight = Math.max(...ys) - Math.min(...ys);
+
+            if (handWidth < 0.16 || handHeight < 0.22) {
+                twoFingerConfidence = 0;
+                gestureLock.textContent =
+                    "🤏 Kurang dekat — dekatkan tangan ke kamera";
+                return;
+            }
+
             if (isTwoFingerGesture(lm)) {
 
                 twoFingerConfidence++;
+                gestureLock.textContent =
+                    "✌️ Mantap, 2 jari terdeteksi...";
 
-             if (twoFingerConfidence >= 3) {
-             unlockTrain();
-    }
+                if (twoFingerConfidence >= 3) {
+                    unlockTrain();
+                }
 
-} else {
+            } else {
 
-    twoFingerConfidence = 0;
+                twoFingerConfidence = 0;
+                gestureLock.textContent =
+                    "✌️ Gesture belum tepat — buka telunjuk & jari tengah";
 
-}
+            }
         });
 
         const camera = new Camera(cameraFeed, {
@@ -6211,6 +6278,28 @@ async function startGestureCamera() {
         gestureLock.textContent =
             "Izinkan kamera untuk membuka perjalanan ✌️";
     }
+}
+
+
+function unlockTrain() {
+
+    if (gestureUnlocked) return;
+
+    gestureUnlocked = true;
+    twoFingerConfidence = 0;
+
+    nextSection.classList.add("show-train");
+    gestureLock.textContent = "🚂 Kereta datang... ✨";
+
+    const manualBtn = document.getElementById("trainManualBtn");
+    if (manualBtn) manualBtn.classList.add("hidden");
+}
+
+const trainManualBtn = document.getElementById("trainManualBtn");
+if (trainManualBtn) {
+    trainManualBtn.addEventListener("click", () => {
+        unlockTrain();
+    });
 }
 
 
